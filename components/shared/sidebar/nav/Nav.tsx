@@ -1,12 +1,13 @@
 'use client';
 
-import { useNavigation, Path } from '@/hooks/useNavigation';
+import { useNavigation, type Path } from '@/hooks/useNavigation';
 import { Card } from '@/components/ui/card';
 import { UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import TooltipWrapper from '../../TooltipWrapper';
 import { useConversation } from '@/hooks/useConversation';
+import { ThemeToggle } from '@/components/ui/theme/ThemeToggle';
 
 const Mods = ['desktop', 'mobile'] as const;
 interface Props {
@@ -50,14 +51,20 @@ const Nav = ({ mode = Mods[0] }: Props) => {
             );
           })}
           {isMobile && (
-            <li>
-              <UserButton />
-            </li>
+            <>
+              <li>
+                <ThemeToggle />
+              </li>
+              <li>
+                <UserButton />
+              </li>
+            </>
           )}
         </ul>
       </nav>
       {!isMobile && (
         <div className="flex flex-col items-center gap-4">
+          <ThemeToggle />
           <UserButton />
         </div>
       )}

@@ -17,7 +17,7 @@ const TooltipWrapper: React.FC<Props> = ({ children, content }) => {
       <TooltipTrigger asChild={true}>
         {children}
       </TooltipTrigger>
-      <TooltipContent className="px-2 py-1 ring-1 rounded-md bg-slate-50 ring-zinc-300 ring-inset z-50">
+      <TooltipContent className="px-2 py-1 ring-1 rounded-md bg-secondary ring-secondary ring-inset z-50">
         <p>{content}</p>
       </TooltipContent>
     </Tooltip>
