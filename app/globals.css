@@ -17,6 +17,11 @@ body {
   }
 }
 
+#loading-logo {
+  width: auto;
+  height: auto;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
