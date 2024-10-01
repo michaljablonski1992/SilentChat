@@ -1,11 +1,11 @@
-import React from 'react';
+import ItemList from '@/components/shared/item-list/ItemList';
 
-type Props = {
+interface Props{
   children: React.ReactNode
 }
 
 const ConversationsLayout = ({ children }: Props) => {
-  return <div>{ children }</div>;
+  return <><ItemList title='Converstations'>Converstations Page</ItemList>{ children }</>;
 }
 
 export default ConversationsLayout;

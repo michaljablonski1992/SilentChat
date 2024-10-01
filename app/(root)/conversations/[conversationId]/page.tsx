@@ -1,7 +1,7 @@
-import React from 'react';
+import ConversationContainer from "@/components/shared/conversation/ConversationContainer";
 
 const ConversationsPage = () => {
-  return <div>ConversationsPageID</div>;
+  return <ConversationContainer>ConversationsPageID</ConversationContainer>;
 }
 
 export default ConversationsPage;
