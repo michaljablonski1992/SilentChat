@@ -40,7 +40,7 @@ const handleClerkWebhook = httpAction(async (ctx, req) => {
 
   switch (event.type) {
     case 'user.created':
-      const user = await ctx.runQuery(internal.user.get, {
+      const user = await ctx.runQuery(internal.users.get, {
         clerkId: event.data.id,
       });
 
@@ -49,7 +49,7 @@ const handleClerkWebhook = httpAction(async (ctx, req) => {
       }
     case 'user.updated':
       console.log('Creating/Updating User:', event.data.id);
-      await ctx.runMutation(internal.user.create, {
+      await ctx.runMutation(internal.users.create, {
         username: `${event.data.first_name} ${event.data.last_name}`,
         imageUrl: event.data.image_url,
         clerkId: event.data.id,
