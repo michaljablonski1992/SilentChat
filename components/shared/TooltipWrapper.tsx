@@ -14,9 +14,7 @@ interface Props {
 const TooltipWrapper: React.FC<Props> = ({ children, content }) => {
   return (
     <Tooltip>
-      <TooltipTrigger asChild={true}>
-        {children}
-      </TooltipTrigger>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
       <TooltipContent className="px-2 py-1 ring-1 rounded-md bg-secondary ring-secondary ring-inset z-50">
         <p>{content}</p>
       </TooltipContent>
@@ -24,4 +22,4 @@ const TooltipWrapper: React.FC<Props> = ({ children, content }) => {
   );
 };
 
-export default TooltipWrapper
+export default TooltipWrapper;

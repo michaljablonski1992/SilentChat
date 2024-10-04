@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import TooltipWrapper from '../../TooltipWrapper';
+import TooltipWrapper from '@/components/shared/TooltipWrapper';
 import { useConversation } from '@/hooks/useConversation';
 import { ThemeToggle } from '@/components/ui/theme/ThemeToggle';
 

@@ -4,6 +4,7 @@ import './globals.css';
 import ConvexClientProvider from '@/providers/ConvexClientProvider';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
 import { ThemeProvider } from '@/components/ui/theme/ThemeProvider';
+import { Toaster } from "@/components/ui/sonner"
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -43,6 +44,7 @@ export default function RootLayout({
             <TooltipProvider>{children}</TooltipProvider>
           </ConvexClientProvider>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );

@@ -44,7 +44,8 @@ export const create = mutation({
         q
           .eq('receiver' as never, receiver._id as never)
           .eq('sender' as never, currentUser._id as never)
-      );
+      )
+      .unique();
     if (requestAlreadySent) {
       throw new ConvexError('Request already sent');
     }
@@ -56,16 +57,17 @@ export const create = mutation({
         q
           .eq('receiver' as never, currentUser._id as never)
           .eq('sender' as never, receiver._id as never)
-      );
+      )
+      .unique();
     if (requestAlreadyReceived) {
-      throw new ConvexError('Request already received');
+      throw new ConvexError('This user already sent you a request');
     }
 
     // create friend request
     const request = await ctx.db.insert('requests', {
       sender: currentUser._id,
-      receiver: receiver._id
-    })
+      receiver: receiver._id,
+    });
 
     return request;
   },
