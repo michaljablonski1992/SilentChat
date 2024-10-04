@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import TooltipWrapper from '@/components/shared/TooltipWrapper';
 import { useConversation } from '@/hooks/useConversation';
 import { ThemeToggle } from '@/components/ui/theme/ThemeToggle';
+import { Badge } from '@/components/ui/badge';
 
 const Mods = ['desktop', 'mobile'] as const;
 interface Props {
@@ -16,13 +17,11 @@ interface Props {
 
 const Nav = ({ mode = Mods[0] }: Props) => {
   const paths = useNavigation();
+  const { isActive } = useConversation();
   const isMobile = mode === 'mobile';
 
-  if (isMobile) {
-    const { isActive } = useConversation();
-    if (isActive) {
-      return null;
-    }
+  if (isMobile && isActive) {
+    return null;
   }
 
   // style depending on mobile/desktop view
@@ -79,9 +78,16 @@ const NavLink = ({ path }: NavLinkProps) => {
   return (
     <Link href={path.href}>
       <TooltipWrapper content={path.name}>
-        <Button size="icon" variant={path.active ? 'default' : 'outline'}>
-          {path.icon}
-        </Button>
+        <div className='relative'>
+          <Button size="icon" variant={path.active ? 'default' : 'outline'}>
+            {path.icon}
+          </Button>
+          {path.count ? (
+            <Badge variant="secondary" className="absolute left-5 bottom-6 px-2">
+              {path.count}
+            </Badge>
+          ) : null}
+        </div>
       </TooltipWrapper>
     </Link>
   );
