@@ -44,7 +44,7 @@ export default function RootLayout({
             <TooltipProvider>{children}</TooltipProvider>
           </ConvexClientProvider>
         </ThemeProvider>
-        <Toaster />
+        <Toaster richColors closeButton/>
       </body>
     </html>
   );

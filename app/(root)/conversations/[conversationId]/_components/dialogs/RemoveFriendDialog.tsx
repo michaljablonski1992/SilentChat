@@ -1,5 +1,6 @@
 "use client";
 
+import FullSpinner from "@/components/shared/FullSpinner";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,7 +15,7 @@ import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useMutationState } from "@/hooks/useMutationState";
 import { ConvexError } from "convex/values";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { toast } from "sonner";
 
 type Props = {
@@ -24,9 +25,11 @@ type Props = {
 };
 
 const RemoveFriendDialog = ({ conversationId, open, setOpen }: Props) => {
+  const [fullSpinnerOpen, setFullSpinnerOpen] = useState<boolean>(false);
   const { mutate: removeFriend, pending } = useMutationState(api.friend.remove);
 
   const handleRemoveFriend = async () => {
+    setFullSpinnerOpen(true);
     removeFriend({ conversationId })
       .then(() => {
         toast.success("Friend has been removed");
@@ -37,10 +40,12 @@ const RemoveFriendDialog = ({ conversationId, open, setOpen }: Props) => {
             ? error.data
             : "Unexpected error occurred"
         );
+        setFullSpinnerOpen(false);
       });
   };
 
-  return (
+  return (<>
+    <FullSpinner open={fullSpinnerOpen} text='This could take a while...' />
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -53,12 +58,13 @@ const RemoveFriendDialog = ({ conversationId, open, setOpen }: Props) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel disabled={pending}>Cancel</AlertDialogCancel>
-          <AlertDialogAction disabled={pending} onClick={handleRemoveFriend}>
+          <AlertDialogAction className="bg-destructive" disabled={pending} onClick={handleRemoveFriend}>
             Delete
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
+  </>
   );
 };
 
