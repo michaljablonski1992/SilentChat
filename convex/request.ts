@@ -8,10 +8,8 @@ export const create = mutation({
     email: v.string(),
   },
   handler: async (ctx, args) => {
-    // get Clerk identity
+    // get Clerk identity + authorize
     const identity = await ctx.auth.getUserIdentity();
-
-    // not logged in
     if (!identity) {
       throw new ConvexError('Unauthorized');
     }
