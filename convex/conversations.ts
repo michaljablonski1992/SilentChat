@@ -2,6 +2,7 @@ import { ConvexError } from 'convex/values';
 import { MutationCtx, QueryCtx, query } from './_generated/server';
 import { getUserByClerkId } from './_utils';
 import { Id } from './_generated/dataModel';
+import { type Conversation } from './conversation';
 
 export const get = query({
   args: {},
@@ -37,8 +38,8 @@ export const get = query({
     );
 
     // get details for conversations
-    const conversationsWithDetails = await Promise.all(
-      conversations.map(async (conversation, index) => {
+    const conversationsWithDetails: Conversation[] = await Promise.all(
+      conversations.map(async (conversation) => {
         const allConversationMemberships = await ctx.db
           .query('conversationMembers')
           .withIndex('by_conversationId', (q) =>
@@ -53,7 +54,8 @@ export const get = query({
 
         if (conversation?.isGroup) {
           return {
-            conversation,
+            ...conversation,
+            otherMembers: [null],
             lastMessage,
           };
         } else {
@@ -64,8 +66,8 @@ export const get = query({
           const otherMember = await ctx.db.get(otherMembership.memberId);
 
           return {
-            conversation,
-            otherMember,
+            ...conversation,
+            otherMembers: [otherMember],
             lastMessage,
           };
         }
@@ -94,10 +96,7 @@ const getLastMessageDetails = async ({
 
   if (!sender) return null;
 
-  const content = getMessageContent(
-    message.type,
-    message.content
-  );
+  const content = getMessageContent(message.type, message.content);
 
   return {
     content,

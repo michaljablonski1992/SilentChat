@@ -30,7 +30,7 @@ const Header = ({ imageUrl, name, options }: Props) => {
         </Link>
         <Avatar className="w-8 h-8">
           <AvatarImage src={imageUrl} />
-          <AvatarFallback>{name?.substring(0, 1)}</AvatarFallback>
+          <AvatarFallback>{name?.charAt(0).toLocaleUpperCase()}</AvatarFallback>
         </Avatar>
         <h2 className="font-semibold">{name}</h2>
         <div className="flex gap-2 absolute right-2">

@@ -14,7 +14,7 @@ type Props = {
     lastSeenMessageId?: Id<'messages'>;
     username?: string;
     [key: string]: unknown;
-  }[];
+  }[] | [];
 };
 
 const Body = ({ members }: Props) => {
