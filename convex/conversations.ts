@@ -2,7 +2,15 @@ import { ConvexError } from 'convex/values';
 import { MutationCtx, QueryCtx, query } from './_generated/server';
 import { getUserByClerkId } from './_utils';
 import { Id } from './_generated/dataModel';
-import { type Conversation } from './conversation';
+import { Conversation } from './conversation';
+
+export interface ConversationWithDetails extends Conversation {
+  lastMessage?: {
+    sender: string;
+    content: string[];
+  } | null;
+  unseenCount: number;
+} 
 
 export const get = query({
   args: {},
@@ -38,8 +46,8 @@ export const get = query({
     );
 
     // get details for conversations
-    const conversationsWithDetails: Conversation[] = await Promise.all(
-      conversations.map(async (conversation) => {
+    const conversationsWithDetails: ConversationWithDetails[] = await Promise.all(
+      conversations.map(async (conversation, index) => {
         const allConversationMemberships = await ctx.db
           .query('conversationMembers')
           .withIndex('by_conversationId', (q) =>
@@ -52,11 +60,29 @@ export const get = query({
           id: conversation.lastMessageId,
         });
 
+        // get last seen message and time
+        const lastSeenMessage = conversationMemberships[index].lastSeenMessage
+        ? await ctx.db.get(conversationMemberships[index].lastSeenMessage!)
+        : null;
+        const lastSeenMessageTime = lastSeenMessage
+          ? lastSeenMessage._creationTime
+          : -1;
+        // get all messages of current conversation and get unseen ones
+        const unseenMessages = await ctx.db
+          .query("messages")
+          .withIndex("by_conversationId", (q) =>
+            q.eq("conversationId", conversation?._id)
+          )
+          .filter((q) => q.gt(q.field("_creationTime"), lastSeenMessageTime))
+          .filter((q) => q.neq(q.field("senderId"), currentUser._id))
+          .collect();
+
         if (conversation?.isGroup) {
           return {
             ...conversation,
-            otherMembers: [null],
+            otherMembers: [],
             lastMessage,
+            unseenCount: unseenMessages.length
           };
         } else {
           const otherMembership = allConversationMemberships.filter(
@@ -67,8 +93,9 @@ export const get = query({
 
           return {
             ...conversation,
-            otherMembers: [otherMember],
+            otherMembers: otherMember ? [otherMember] : [],
             lastMessage,
+            unseenCount: unseenMessages.length
           };
         }
       })

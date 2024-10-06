@@ -4,7 +4,7 @@ import DeleteGroupDialog from './dialogs/DeleteGroupDialog';
 import LeaveGroupDialog from './dialogs/LeaveGroupDialog';
 import Header from './Header';
 import Body from './body/Body';
-import { type Conversation } from '@/convex/conversation';
+import { Conversation } from '@/convex/conversation';
 
 interface Props {
   conversation: Conversation;

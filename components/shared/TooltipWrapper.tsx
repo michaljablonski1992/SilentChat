@@ -5,10 +5,11 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@radix-ui/react-tooltip';
+import React from 'react';
 
 interface Props {
   children: React.ReactNode;
-  content: string;
+  content: React.ReactNode;
 }
 
 const TooltipWrapper: React.FC<Props> = ({ children, content }) => {

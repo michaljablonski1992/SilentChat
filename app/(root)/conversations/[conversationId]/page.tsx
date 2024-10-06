@@ -1,7 +1,6 @@
 "use client";
 
 import ConversationContainer from "@/components/shared/conversation/ConversationContainer";
-import React, { useState } from "react";
 import ChatInput from "./_components/input/ChatInput";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";

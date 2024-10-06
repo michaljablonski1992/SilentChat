@@ -1,13 +1,14 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Id } from "@/convex/_generated/dataModel";
-import { type Conversation } from '@/convex/conversation';
+import { ConversationWithDetails } from '@/convex/conversations';
 import { useConversation } from "@/hooks/useConversation";
+import { Badge } from '@/components/ui/badge';
 import { User } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 type Props = {
-  conversations: Conversation[]
+  conversations: ConversationWithDetails[]
 };
 
 const ConversationList = ({
@@ -26,17 +27,19 @@ const ConversationList = ({
           lastMessageSender={conversation.lastMessage?.sender}
           lastMessageContent={conversation.lastMessage?.content}
           active={activeConversationId === conversation._id}
+          unseenCount={conversation.unseenCount}
         />
       ) : (
         <ConversationItem
           key={conversation._id}
           id={conversation._id}
           mode='private'
-          name={conversation.otherMembers[0]!.username || ''}
-          imageUrl={conversation.otherMembers[0]!.imageUrl || ''}
+          name={conversation.otherMembers[0].username || ''}
+          imageUrl={conversation.otherMembers[0].imageUrl || ''}
           lastMessageSender={conversation.lastMessage?.sender}
           lastMessageContent={conversation.lastMessage?.content}
           active={activeConversationId === conversation._id}
+          unseenCount={conversation.unseenCount}
         />
       );
     })
@@ -53,6 +56,7 @@ type ConversationItemProps = {
   lastMessageSender?: string;
   lastMessageContent?: string[];
   active: boolean;
+  unseenCount: number;
 };
 const ConversationItem = ({
   id,
@@ -61,7 +65,8 @@ const ConversationItem = ({
   name,
   lastMessageSender,
   lastMessageContent,
-  active
+  active,
+  unseenCount
 }: ConversationItemProps) => {
   const isGroup = mode === 'group';
 
@@ -95,6 +100,8 @@ const ConversationItem = ({
             )}
           </div>
         </div>
+
+        {unseenCount ? <Badge>{unseenCount}</Badge> : undefined}
       </Card>
     </Link>
   );

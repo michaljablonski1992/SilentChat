@@ -3,24 +3,18 @@ import { mutation, query } from './_generated/server';
 import { getUserByClerkId } from './_utils';
 import { Id } from './_generated/dataModel';
 
-export type Conversation = {
+export interface Conversation {
   _id: Id<'conversations'>;
   name?: string;
   isGroup?: boolean;
-  otherMembers:
-    | ({
-        _id: Id<'users'>;
-        _creationTime: number;
-        username: string;
-        imageUrl: string;
-        clerkId: string;
-        email: string;
-      } | null)[]
-    | null[];
-  lastMessage: {
-    sender: string;
-    content: string[];
-  } | null;
+  otherMembers: {
+    _id: Id<'users'>;
+    _creationTime: number;
+    username: string;
+    imageUrl: string;
+    clerkId: string;
+    email: string;
+  }[];
 };
 
 export const get = query({
