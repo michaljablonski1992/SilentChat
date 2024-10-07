@@ -23,6 +23,7 @@ const ConversationContent = ({ conversation }: Props) => {
 
 const PrivateConversationContent = ({ conversation }: Props) => {
   const [removeFriendDialogOpen, setRemoveFriendDialogOpen] = useState(false);
+  const [callType, setCallType] = useState<'audio' | 'video' | null>(null);
 
   return (
     <>
@@ -41,8 +42,13 @@ const PrivateConversationContent = ({ conversation }: Props) => {
             onClick: () => setRemoveFriendDialogOpen(true),
           },
         ]}
+        setCallType={setCallType}
       />
-      <Body members={[conversation.otherMembers[0]]} />
+      <Body
+        setCallType={setCallType}
+        callType={callType}
+        members={[conversation.otherMembers[0]]}
+      />
     </>
   );
 };

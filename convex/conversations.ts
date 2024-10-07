@@ -136,6 +136,8 @@ const getMessageContent = (type: string, content: string[]) => {
   switch (type) {
     case 'text':
       return content;
+    case 'call':
+      return ['[Call]']
     default:
       return content;
   }

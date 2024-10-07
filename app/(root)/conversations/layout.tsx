@@ -13,6 +13,7 @@ interface Props {
 
 const ConversationsLayout = ({ children }: Props) => {
   const conversations = useQuery(api.conversations.get);
+  console.log(JSON.stringify(conversations))
   return (
     <>
       <ItemList title="Converstations" action={<CreateGroupDialog />}>

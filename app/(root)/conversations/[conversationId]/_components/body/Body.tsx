@@ -3,11 +3,12 @@
 import { api } from '@/convex/_generated/api';
 import { Id } from '@/convex/_generated/dataModel';
 import { useQuery } from 'convex/react';
-import React, { useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import Message from './Message';
 import { useMutationState } from '@/hooks/useMutationState';
 import { useConversation } from '@/hooks/useConversation';
 import TooltipWrapper from '@/components/shared/TooltipWrapper';
+import { CallRoom } from './CallRoom';
 
 type Props = {
   members: {
@@ -16,9 +17,11 @@ type Props = {
     username?: string;
     [key: string]: unknown;
   }[];
+  callType: 'audio' | 'video' | null;
+  setCallType: Dispatch<SetStateAction<'audio' | 'video' | null>>;
 };
 
-const Body = ({ members }: Props) => {
+const Body = ({ members, callType, setCallType }: Props) => {
   const { conversationId } = useConversation();
   const messages = useQuery(api.messages.get, {
     id: conversationId as Id<'conversations'>,
@@ -43,30 +46,36 @@ const Body = ({ members }: Props) => {
 
   return (
     <div className="flex-1 w-full flex overflow-y-scroll flex-col-reverse gap-2 p-3 no-scrollbar">
-      {messages?.map(
-        ({ message, senderImage, senderName, isCurrentUser }, index) => {
-          const lastByUser =
-            messages[index - 1]?.message.senderId ===
-            messages[index].message.senderId;
+      {!callType &&
+        messages?.map(
+          ({ message, senderImage, senderName, isCurrentUser }, index) => {
+            const lastByUser =
+              messages[index - 1]?.message.senderId ===
+              messages[index].message.senderId;
 
-          const seenUsers = isCurrentUser
-            ? getSeenMessage(message._id)
-            : [];
+            const seenUsers = isCurrentUser ? getSeenMessage(message._id) : [];
 
-          return (
-            <Message
-              key={message._id}
-              fromCurrentUser={isCurrentUser}
-              senderImage={senderImage}
-              senderName={senderName}
-              lastByUser={lastByUser}
-              content={message.content}
-              createdAt={message._creationTime}
-              seen={<SeenBy seenUsers={seenUsers} />}
-              type={message.type}
-            />
-          );
-        }
+            return (
+              <Message
+                key={message._id}
+                fromCurrentUser={isCurrentUser}
+                senderImage={senderImage}
+                senderName={senderName}
+                lastByUser={lastByUser}
+                content={message.content}
+                createdAt={message._creationTime}
+                seen={<SeenBy seenUsers={seenUsers} />}
+                type={message.type}
+              />
+            );
+          }
+        )}
+      {callType && (
+        <CallRoom
+          audio={callType === 'audio' || callType === 'video'}
+          video={callType === 'video'}
+          handleDisconnect={() => setCallType(null)}
+        />
       )}
     </div>
   );
@@ -84,7 +93,9 @@ const SeenBy = ({ seenUsers }: SeenByProps) => {
       return <p className={pClassName}>{`Seen by ${seenUsers[0]}`}</p>;
     case 2:
       return (
-        <p className={pClassName}>{`Seen by ${seenUsers[0]} and ${seenUsers[1]}`}</p>
+        <p
+          className={pClassName}
+        >{`Seen by ${seenUsers[0]} and ${seenUsers[1]}`}</p>
       );
     default:
       return (

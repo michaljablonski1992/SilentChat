@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { format } from "date-fns";
+import { Badge } from '@/components/ui/badge';
 
 type Props = {
   fromCurrentUser: boolean;
@@ -48,11 +49,14 @@ const Message = ({
             "rounded-bl-none": !lastByUser && !fromCurrentUser,
           })}
         >
-          {type === "text" ? (
+           {type === "text" && (
             <p className="text-wrap break-words whitespace-pre-wrap break-all">
               {content}
             </p>
-          ) : null}
+          )}
+          {type === "call" && (
+            <Badge variant="secondary">Joined Call</Badge>
+          )}
           <p
             className={cn(`text-xs flex w-full my-1`, {
               "text-primary-foreground justify-end": fromCurrentUser,
