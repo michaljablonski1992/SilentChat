@@ -7,9 +7,9 @@ import { SendHorizonal } from 'lucide-react';
 import {
   useRef,
   useState,
-  MouseEvent,
   ChangeEvent,
   KeyboardEvent,
+  MouseEvent,
 } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import { toast } from 'sonner';
@@ -27,11 +27,15 @@ import {
 } from '@/components/ui/form';
 import { useConversation } from '@/hooks/useConversation';
 import LoaderSpinner from '@/components/shared/LoaderSpinner';
+import ChatEmojiPicker from './ChatEmojiPicker';
 
 type ChatInputProps = {};
 
 const chatMessageSchema = z.object({
-  content: z.string().min(1, { message: "Message can't be empty" }).max(512, { message: "Message is too long" }),
+  content: z
+    .string()
+    .min(1, { message: "Message can't be empty" })
+    .max(512, { message: 'Message is too long' }),
 });
 
 const ChatInput: React.FC<ChatInputProps> = ({}) => {
@@ -48,7 +52,6 @@ const ChatInput: React.FC<ChatInputProps> = ({}) => {
       content: '',
     },
   });
-
   const handleInputChange = (
     event: ChangeEvent<HTMLTextAreaElement> | MouseEvent<HTMLTextAreaElement>
   ) => {
@@ -88,6 +91,12 @@ const ChatInput: React.FC<ChatInputProps> = ({}) => {
   return (
     <Card className="w-full p-2 rounded-lg relative">
       <div className="flex gap-2 items-end w-full">
+        <ChatEmojiPicker
+          form={form}
+          targetRef={textareaRef}
+          cursorPosition={cursorPosition}
+          setCursorPositionHandler={setCursorPosition}
+        />
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
@@ -98,9 +107,10 @@ const ChatInput: React.FC<ChatInputProps> = ({}) => {
               name="content"
               render={({ field }) => (
                 <FormItem className="h-full w-full">
-                  <FormControl>
+                  <FormControl ref={textareaRef}>
                     <TextareaAutosize
                       onKeyDown={onEnterMessage}
+                      autoFocus
                       rows={1}
                       maxRows={3}
                       {...field}
