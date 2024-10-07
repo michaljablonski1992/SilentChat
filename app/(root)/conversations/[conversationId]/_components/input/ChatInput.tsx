@@ -31,7 +31,7 @@ import LoaderSpinner from '@/components/shared/LoaderSpinner';
 type ChatInputProps = {};
 
 const chatMessageSchema = z.object({
-  content: z.string().min(1, { message: "This field can't be empty" }),
+  content: z.string().min(1, { message: "Message can't be empty" }).max(512, { message: "Message is too long" }),
 });
 
 const ChatInput: React.FC<ChatInputProps> = ({}) => {

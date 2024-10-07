@@ -41,11 +41,12 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 
 const createGroupFormSchema = z.object({
-  name: z.string().min(1, { message: "This field can't be empty" }),
+  name: z.string().min(1, { message: "This field can't be empty" }).max(64, { message: "Group name is too long" }),
   members: z
     .string()
     .array()
-    .min(1, { message: 'You must select at least 1 friend' }),
+    .min(1, { message: 'You must select at least 1 friend' })
+    .max(32, { message: 'Maximum group size is 32' }),
 });
 
 const CreateGroupDialog = () => {
