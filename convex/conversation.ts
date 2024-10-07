@@ -15,7 +15,7 @@ export interface Conversation {
     clerkId?: string;
     email?: string;
   }[];
-};
+}
 
 export const get = query({
   args: { id: v.id('conversations') },
@@ -182,8 +182,8 @@ export const deleteGroup = mutation({
       throw new ConvexError('Unauthorized');
     }
     // get current user from convex
-    const curentUser = await getUserByClerkId(ctx, identity.subject);
-    if (!curentUser) {
+    const currentUser = await getUserByClerkId(ctx, identity.subject);
+    if (!currentUser) {
       throw new ConvexError('User not found');
     }
 
@@ -238,8 +238,8 @@ export const leaveGroup = mutation({
       throw new ConvexError('Unauthorized');
     }
     // get current user from convex
-    const curentUser = await getUserByClerkId(ctx, identity.subject);
-    if (!curentUser) {
+    const currentUser = await getUserByClerkId(ctx, identity.subject);
+    if (!currentUser) {
       throw new ConvexError('User not found');
     }
 
@@ -254,7 +254,7 @@ export const leaveGroup = mutation({
       .query('conversationMembers')
       .withIndex('by_memberId_conversationId', (q) =>
         q
-          .eq('memberId', curentUser._id)
+          .eq('memberId', currentUser._id)
           .eq('conversationId', args.conversationId)
       )
       .unique();
@@ -290,6 +290,18 @@ export const leaveGroup = mutation({
           await ctx.db.delete(message._id);
         })
       );
+    } else {
+      // add message that member left the group
+
+      // insert message
+      const message = await ctx.db.insert('messages', {
+        senderId: currentUser._id,
+        conversationId: args.conversationId,
+        type: 'group-left',
+        content: [],
+      });
+      // update last message id for conversation
+      await ctx.db.patch(args.conversationId, { lastMessageId: message });
     }
   },
 });

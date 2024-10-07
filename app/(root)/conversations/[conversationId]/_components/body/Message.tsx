@@ -57,6 +57,9 @@ const Message = ({
           {type === "call" && (
             <Badge variant="secondary">Joined Call</Badge>
           )}
+          {type === "group-left" && (
+            <Badge variant="secondary">Has left the group</Badge>
+          )}
           <p
             className={cn(`text-xs flex w-full my-1`, {
               "text-primary-foreground justify-end": fromCurrentUser,

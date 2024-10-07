@@ -138,6 +138,8 @@ const getMessageContent = (type: string, content: string[]) => {
       return content;
     case 'call':
       return ['[Call]']
+    case 'group-left':
+      return ['[Has left the group]']
     default:
       return content;
   }
