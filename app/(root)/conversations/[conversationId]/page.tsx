@@ -16,7 +16,6 @@ type Props = {
 
 const ConversationPage = ({ params: { conversationId } }: Props) => {
   const conversation = useQuery(api.conversation.get, { id: conversationId });
-  console.log(conversation);
 
   return conversation === undefined ? (
     <div className="w-full h-full flex items-center justify-center">

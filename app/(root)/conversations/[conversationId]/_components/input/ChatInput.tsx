@@ -62,7 +62,7 @@ const ChatInput: React.FC = () => {
 
   const handleSubmit = async (values: z.infer<typeof chatMessageSchema>) => {
     createMessage({
-      content: [values.content],
+      content: [values.content.trim()],
       type: 'text',
       conversationId,
     })
