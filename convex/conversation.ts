@@ -8,12 +8,12 @@ export interface Conversation {
   name?: string;
   isGroup?: boolean;
   otherMembers: {
-    _id: Id<'users'>;
-    _creationTime: number;
-    username: string;
-    imageUrl: string;
-    clerkId: string;
-    email: string;
+    _id?: Id<'users'>;
+    _creationTime?: number;
+    username?: string;
+    imageUrl?: string;
+    clerkId?: string;
+    email?: string;
   }[];
 };
 

@@ -29,8 +29,6 @@ import { useConversation } from '@/hooks/useConversation';
 import LoaderSpinner from '@/components/shared/LoaderSpinner';
 import ChatEmojiPicker from './ChatEmojiPicker';
 
-type ChatInputProps = {};
-
 const chatMessageSchema = z.object({
   content: z
     .string()
@@ -38,7 +36,7 @@ const chatMessageSchema = z.object({
     .max(512, { message: 'Message is too long' }),
 });
 
-const ChatInput: React.FC<ChatInputProps> = ({}) => {
+const ChatInput: React.FC = () => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [cursorPosition, setCursorPosition] = useState(0);
   const { conversationId } = useConversation();

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import RemoveFriendDialog from './dialogs/RemoveFriendDialog';
 import DeleteGroupDialog from './dialogs/DeleteGroupDialog';
 import LeaveGroupDialog from './dialogs/LeaveGroupDialog';
@@ -12,18 +12,22 @@ interface Props {
 
 const ConversationContent = ({ conversation }: Props) => {
   const isGroup = conversation.isGroup;
+  const [callType, setCallType] = useState<'audio' | 'video' | null>(null);
 
   return (
     <>
-      {!isGroup && <PrivateConversationContent conversation={conversation} />}
-      {isGroup && <GroupConversationContent conversation={conversation} />}
+      {!isGroup && <PrivateConversationContent callType={callType} setCallType={setCallType} conversation={conversation} />}
+      {isGroup && <GroupConversationContent callType={callType} setCallType={setCallType} conversation={conversation} />}
     </>
   );
 };
 
-const PrivateConversationContent = ({ conversation }: Props) => {
+interface ConversationProps extends Props {
+  callType: 'audio' | 'video' | null;
+  setCallType: Dispatch<SetStateAction<'audio' | 'video' | null>>;
+}
+const PrivateConversationContent = ({ conversation, callType, setCallType }: ConversationProps) => {
   const [removeFriendDialogOpen, setRemoveFriendDialogOpen] = useState(false);
-  const [callType, setCallType] = useState<'audio' | 'video' | null>(null);
 
   return (
     <>
@@ -53,7 +57,7 @@ const PrivateConversationContent = ({ conversation }: Props) => {
   );
 };
 
-const GroupConversationContent = ({ conversation }: Props) => {
+const GroupConversationContent = ({ conversation, callType, setCallType }: ConversationProps) => {
   const [deleteGroupDialogOpen, setDeleteGroupDialogOpen] = useState(false);
   const [leaveGroupDialogOpen, setLeaveGroupDialogOpen] = useState(false);
 
@@ -83,8 +87,13 @@ const GroupConversationContent = ({ conversation }: Props) => {
             onClick: () => setDeleteGroupDialogOpen(true),
           },
         ]}
+        setCallType={setCallType}
       />
-      <Body members={conversation.otherMembers} />
+      <Body
+        setCallType={setCallType}
+        callType={callType}
+        members={conversation.otherMembers}
+      />
     </>
   );
 };

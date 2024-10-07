@@ -36,7 +36,7 @@ const ChatEmojiPicker = ({
       targetRef.current.selectionEnd = cursorPosition;
       targetRef.current.focus();
     }
-  }, [cursorPosition])
+  }, [cursorPosition, targetRef])
 
   const insertEmoji = (emoji: string) => {
     const newText = [

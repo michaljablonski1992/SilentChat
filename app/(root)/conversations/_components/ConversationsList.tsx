@@ -47,10 +47,10 @@ const ConversationList = ({
 };
 
 // ConversationItem
-const ConversationItemMods = ['private', 'group'] as const;
+type ConversationItemMods = ['private', 'group'];
 type ConversationItemProps = {
   id: Id<"conversations">;
-  mode: (typeof ConversationItemMods)[number];
+  mode: ConversationItemMods[number];
   imageUrl?: string;
   name: string;
   lastMessageSender?: string;

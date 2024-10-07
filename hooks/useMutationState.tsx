@@ -1,12 +1,12 @@
 import { useMutation } from "convex/react";
 import { FunctionReference } from "convex/server";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export const useMutationState = (mutationToRun: FunctionReference<'mutation'>) => {
   const [pending, setPending] = useState(false);
   const mutationFn = useMutation(mutationToRun);
 
-  const mutate = (payload: unknown) => {
+  const mutate = useCallback((payload: unknown) => {
     setPending(true);
 
     return mutationFn(payload)
@@ -17,7 +17,7 @@ export const useMutationState = (mutationToRun: FunctionReference<'mutation'>) =
         throw error;
       })
       .finally(() => setPending(false));
-  };
+  }, [])
 
   return {
     mutate,

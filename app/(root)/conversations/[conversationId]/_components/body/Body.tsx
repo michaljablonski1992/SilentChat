@@ -34,7 +34,7 @@ const Body = ({ members, callType, setCallType }: Props) => {
         messageId: messages[0].message._id,
       });
     }
-  }, [messages, conversationId]);
+  }, [messages, conversationId, markRead]);
 
   const getSeenMessage = (messageId: Id<'messages'>) => {
     const seenUsers = members

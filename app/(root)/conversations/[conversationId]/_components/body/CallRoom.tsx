@@ -23,7 +23,7 @@ export const CallRoom = ({ audio, video, handleDisconnect }: CallRoomProps) => {
 
   const { conversationId } = useConversation();
 
-  const { mutate: createMessage, pending } = useMutationState(
+  const { mutate: createMessage } = useMutationState(
     api.message.create
   );
 
@@ -40,7 +40,7 @@ export const CallRoom = ({ audio, video, handleDisconnect }: CallRoomProps) => {
         const data = await res.json();
 
         setToken(data.token);
-      } catch (error) {
+      } catch {
         toast.error("Could not join the call");
       }
     })();
