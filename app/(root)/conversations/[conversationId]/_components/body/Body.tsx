@@ -31,7 +31,7 @@ const Body = ({ members }: Props) => {
         messageId: messages[0].message._id,
       });
     }
-  }, [messages, conversationId, markRead]);
+  }, [messages, conversationId]);
 
   const getSeenMessage = (messageId: Id<'messages'>) => {
     const seenUsers = members
