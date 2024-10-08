@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SilentChat
 
-## Getting Started
+SilentChat is a private and group messaging application that prioritizes user privacy and discretion. Users can chat securely with the ability to remove their conversations and accounts at any time, ensuring complete control over their data.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Private Messaging**: Chat one-on-one with complete privacy.
+- **Group Chat**: Create and participate in group conversations.
+- **Full Discretion**: Delete conversations and your account at any time for 100% privacy.
+- **Audio/Video Calls**: Seamlessly start private or group audio and video calls with other users.
+- **Responsive Web App**: Fully responsive, works seamlessly on desktop and mobile.
+- **Available on Android & iOS**: Access SilentChat on your favorite mobile devices via the Android and iOS apps.
+- **Simple and Intuitive Interface**: User-friendly interface for easy navigation and use.
+- **Secure**: Your conversations stay between you and the people you chat with.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Built With
+- **Next.js** - The React framework for server-side rendering and static site generation
+- **ReactJS** - A JavaScript library for building user interfaces
+- **Tailwind CSS** - Utility-first CSS framework for responsive design and styling
+- **TypeScript** - Ensures type-safe code for better development experience
+- **Shadcn/UI** - For reusable components and consistent theming
+- **Convex DB** - Real-time database for managing chat data
+- **Clerk** - Authentication service for handling user accounts and secure logins
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Privacy Features
+- **Remove Conversations**: Users can delete any chat conversation with a single click.
+- **Delete Account**: Users can remove their account and all associated data at any time.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+This project is licensed under the MIT License.
