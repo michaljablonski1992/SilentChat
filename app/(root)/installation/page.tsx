@@ -13,7 +13,7 @@ const InstallationPage = () => {
             </li>
             <li>
               <strong>Full-Screen Experience</strong>: When installed,
-              SilentChat runs in full-screen mode without the browser’s address
+              SilentChat runs in full-screen mode without the browser&apos;s address
               bar, giving you an immersive chat experience.
             </li>
           </ul>
@@ -40,11 +40,11 @@ const InstallationPage = () => {
           <ul className="list-disc list-inside mb-4">
             <li>
               <strong>Look for the install icon</strong> in the address bar (a
-              small "+" or computer icon). If you don’t see it, open the browser
+              small &quot;+&quot; or computer icon). If you don&apos;t see it, open the browser
               menu (three dots in the top-right corner).
             </li>
             <li>
-              <strong>Click</strong> on "Install SilentChat" from the menu.
+              <strong>Click</strong> on &quot;Install SilentChat&quot; from the menu.
             </li>
             <li>
               <strong>Confirm</strong> the installation. SilentChat will be
@@ -76,8 +76,8 @@ const InstallationPage = () => {
               Create a <strong>desktop shortcut</strong> manually:
               <ul className="list-disc list-inside ml-5">
                 <li>
-                  On Windows: Right-click on the desktop, choose "New &gt;
-                  Shortcut," and paste the URL of SilentChat.
+                  On Windows: Right-click on the desktop, choose &quot;New &gt;
+                  Shortcut,&quot; and paste the URL of SilentChat.
                 </li>
                 <li>
                   On Mac: Add the URL as a shortcut via the dock or manually in
@@ -93,8 +93,8 @@ const InstallationPage = () => {
               <strong>Open</strong> SilentChat in Safari.
             </li>
             <li>
-              <strong>Go to the top menu bar</strong> and select "File &gt; Add
-              to Dock."
+              <strong>Go to the top menu bar</strong> and select &quot;File &gt; Add
+              to Dock.&quot;
             </li>
             <li>
               SilentChat will now appear in your dock as a shortcut, giving you
@@ -115,8 +115,8 @@ const InstallationPage = () => {
               browser.
             </li>
             <li>
-              Select <strong>"Install app"</strong> or{' '}
-              <strong>"Add to Home Screen"</strong> from the menu.
+              Select <strong>&quot;Install app&quot;</strong> or{' '}
+              <strong>&quot;Add to Home Screen&quot;</strong> from the menu.
             </li>
             <li>
               <strong>Confirm</strong> the installation when prompted.
@@ -135,8 +135,8 @@ const InstallationPage = () => {
               browser.
             </li>
             <li>
-              Select <strong>"Install"</strong> or{' '}
-              <strong>"Add to Home Screen"</strong>.
+              Select <strong>&quot;Install&quot;</strong> or{' '}
+              <strong>&quot;Add to Home Screen&quot;</strong>.
             </li>
             <li>
               <strong>Confirm</strong> the installation, and SilentChat will
@@ -153,10 +153,10 @@ const InstallationPage = () => {
               arrow) located at the bottom of the screen.
             </li>
             <li>
-              Scroll down and tap <strong>"Add to Home Screen"</strong>.
+              Scroll down and tap <strong>&quot;Add to Home Screen&quot;</strong>.
             </li>
             <li>
-              <strong>Confirm</strong> by tapping "Add" in the top-right corner.
+              <strong>Confirm</strong> by tapping &quot;Add&quot; in the top-right corner.
             </li>
             <li>
               SilentChat will be added to your home screen and can be launched
