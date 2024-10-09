@@ -21,7 +21,20 @@
   background: theme('colors.primary.DEFAULT');
 }
 
-html, body {
+/* user button size */
+.cl-userButton-root {
+  @apply pt-2 lg:pt-0;
+}
+.cl-userButton-root,
+.cl-userButton-root .cl-avatarImage,
+.cl-userButton-root .cl-button,
+.cl-userButton-root .cl-userButtonBox,
+.cl-userButton-root .cl-avatarBox {
+  @apply min-w-10 min-h-10 w-10 h-10;
+}
+
+html,
+body {
   height: 100%;
   overflow: hidden;
 }
