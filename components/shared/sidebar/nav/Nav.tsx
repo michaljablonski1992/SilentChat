@@ -19,6 +19,7 @@ const Nav = ({ mode = Mods[0] }: Props) => {
   const paths = useNavigation();
   const { isActive } = useConversation();
   const isMobile = mode === 'mobile';
+  const installationPath = paths.find((path) => path.id === 'installation');
 
   if (isMobile && isActive) {
     return null;
@@ -34,7 +35,7 @@ const Nav = ({ mode = Mods[0] }: Props) => {
   } else {
     // desktop
     cardClassName =
-      'hidden lg:flex lg:flex-col lg:justify-between lg:items-center lg:h-full lg:w-16 lg:px-2 lg:py-4';
+      'hidden lg:flex lg:flex-col lg:justify-between lg:items-center lg:h-full lg:w-16 lg:px-2 lg:mr-2 lg:py-4';
     ulClassName = 'flex flex-col items-center gap-4';
   }
 
@@ -42,18 +43,25 @@ const Nav = ({ mode = Mods[0] }: Props) => {
     <Card className={cardClassName}>
       <nav className={navClassName}>
         <ul className={ulClassName}>
-          {paths.map((path, id) => {
-            return (
-              <li key={id} className="">
-                <NavLink path={path} />
-              </li>
-            );
-          })}
+          {paths
+            .filter((path) => path.type === 'main')
+            .map((path, id) => {
+              return (
+                <li key={id}>
+                  <NavLink path={path} />
+                </li>
+              );
+            })}
           {isMobile && (
             <>
               <li>
                 <ThemeToggle />
               </li>
+              {installationPath && (
+                <li>
+                  <NavLink path={installationPath} />
+                </li>
+              )}
               <li>
                 <UserButton />
               </li>
@@ -64,6 +72,7 @@ const Nav = ({ mode = Mods[0] }: Props) => {
       {!isMobile && (
         <div className="flex flex-col items-center gap-4">
           <ThemeToggle />
+          {installationPath && <NavLink path={installationPath} />}
           <UserButton />
         </div>
       )}
@@ -78,12 +87,15 @@ const NavLink = ({ path }: NavLinkProps) => {
   return (
     <Link href={path.href}>
       <TooltipWrapper content={path.name}>
-        <div className='relative'>
+        <div className="relative">
           <Button size="icon" variant={path.active ? 'default' : 'outline'}>
             {path.icon}
           </Button>
           {path.count ? (
-            <Badge variant="secondary" className="absolute left-5 bottom-6 px-2">
+            <Badge
+              variant="secondary"
+              className="absolute left-5 bottom-6 px-2"
+            >
               {path.count}
             </Badge>
           ) : null}

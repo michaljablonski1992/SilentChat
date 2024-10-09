@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: theme('colors.secondary.DEFAULT');
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: theme('colors.primary.DEFAULT');
+  border-radius: 5px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.primary.DEFAULT');
+}
+
 html, body {
   height: 100%;
   overflow: hidden;

@@ -1,10 +1,14 @@
 import { useQuery } from 'convex/react';
-import { MessageSquare, User } from 'lucide-react';
+import { MessageSquare, User, MonitorSmartphone } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 import { api } from "@/convex/_generated/api";
 
+// main is for main navigation, other is for other purposes
+type Types = ['main', 'other'];
 export type Path = {
+  id: string;
+  type: Types[number];
   name: string;
   href: string;
   icon: React.ReactNode;
@@ -27,6 +31,8 @@ export const useNavigation = () => {
   const paths = useMemo(() => {
     const _paths: Path[] = [
       {
+        id: 'conversations',
+        type: 'main',
         name: 'Conversations',
         href: '/conversations',
         icon: <MessageSquare />,
@@ -34,11 +40,21 @@ export const useNavigation = () => {
         count: unseenMessagesCount
       },
       {
+        id: 'friends',
+        type: 'main',
         name: 'Friends',
         href: '/friends',
         icon: <User />,
         active: pathname === '/friends',
         count: requestCount
+      },
+      {
+        id: 'installation',
+        type: 'other',
+        name: 'Installation',
+        href: '/installation',
+        icon: <MonitorSmartphone />,
+        active: pathname === '/installation',
       },
     ];
     return _paths;
