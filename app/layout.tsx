@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import ConvexClientProvider from '@/providers/ConvexClientProvider';
@@ -17,9 +17,20 @@ const geistMono = localFont({
   weight: '100 900',
 });
 
+export const viewport: Viewport = {
+  themeColor: "DodgerBlue",
+};
+
 export const metadata: Metadata = {
   title: 'SilentChat',
-  description: 'App for private conversations',
+  description: 'Chat app for private conversations',
+  generator: "Next.js",
+  manifest: "/manifest.json",
+  authors: [{ name: "5lab" }],
+  icons: [
+    { rel: "apple-touch-icon", url: "icon-192x192.png" },
+    { rel: "icon", url: "icon-192x192.png" },
+  ],
 };
 
 export default function RootLayout({
