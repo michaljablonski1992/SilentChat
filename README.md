@@ -9,7 +9,7 @@ SilentChat is a private and group messaging application that prioritizes user pr
 - **Full Discretion**: Delete conversations and your account at any time for 100% privacy.
 - **Audio/Video Calls**: Seamlessly start private or group audio and video calls with other users.
 - **Responsive Web App**: Fully responsive, works seamlessly on desktop and mobile.
-- **Available on Android & iOS**: Access SilentChat on your favorite mobile devices via the Android and iOS apps.
+- **Progressive Web App (PWA)**: Installable on mobile and desktop, SilentChat provides a native-like experience.
 - **Simple and Intuitive Interface**: User-friendly interface for easy navigation and use.
 - **Secure**: Your conversations stay between you and the people you chat with.
 
